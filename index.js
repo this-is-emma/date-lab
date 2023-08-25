@@ -7,7 +7,6 @@ console.log(today, '<- Today')
 // It's really a number
 console.log(today.getTime(), '<- Time') 
 
-
 // It's really the number of milliseconds since 1970
 // get the number of years since 1970
 console.log('Years since 1970')
@@ -19,7 +18,6 @@ console.log(today / 1000 / 60 / 60 / 24 / 365.25)
 // or divide by 86,400 seconds
 console.log(today / 86400 / 1000 / 365.25)
 
-
 console.log('-------- Age --------')
 
 // You can make a date from almost any 
@@ -29,7 +27,6 @@ const bday = new Date('Sept 26, 1965')
 const age = today - bday 
 console.log(age, '<- Age in ms')
 // Challenge: Calculate your age in secs, mins, hrs, days, years
-
 
 console.log('-------- BDay --------')
 
@@ -49,7 +46,6 @@ console.log(months[newYear.getMonth()])
 // Days of the week are also 0 indexed 0:Sun - 6:Sat 
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
 // Challenge: Show the day of the week of your birthday
-
 
 console.log('-------- Data Offsets --------')
 
@@ -71,16 +67,14 @@ console.log(startDate.getDate(), dueDate.getDate())
 console.log(startDate, dueDate)
 // Check these dates they should be 7 days ago and 3 days from now
 
-
-
 // Try these problems 
 
 console.log('--------- Problem 1 --------')
 // Schedule future dates - Given a date return a list of 
-// dates separated by a time offset
+// dates separated by a days offset
 // date is a Date object
 // repeat is a number, the number of repeats 
-// offset is a number, the number days between dates returned
+// offset is the number days between each of the dates returned
 
 function consecutiveDates(date, repeat, offset) {
   // Your code here 
@@ -109,12 +103,14 @@ consecutiveDates(new Date(2019, 0, 1), 4, 3)
 // 
 // }
 
-
-
 console.log('--------- Problem 2 --------')
 
 // Write a function to order dates
 // Takes an array of dates, returns an array of ordered dates
+// Important! Array.sort() will sort alphabetically without a sorting function
+// const nums = [5555, 888, 77, 2222, 1111, 3333]
+// nums.sort() -> [1111, 2222, 3333, 5555, 888, 77]
+// nums.sort((a,b) => a - b) -> [77, 888, 1111, 2222, 5555]
 
 function orderDates(dates) {
   // orders the dates 
@@ -137,7 +133,7 @@ console.log('--------- Problem 3 --------')
 
 // Given an array of dates find the date that will happen next. 
 // You need to find the date that is closetest to today
-// but not before. 
+// but not before!
 
 function nextDate(dates) {
   // find the date that will happen next in dates
@@ -163,11 +159,3 @@ whensYourParty(bday, 2022)
 // Stretch Goal: Return an array listing all 
 // the days when your birthday occured since 
 // you were born. 
-
-
-
-const nums = [5555, 888, 77, 2222, 1111, 3333]
-nums.sort((a,b) => a - b)
-
-console.log('<><><><><><><>')
-console.log(nums)
