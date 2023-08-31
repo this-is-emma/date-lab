@@ -1,18 +1,18 @@
-// What is a date? 
+// What is a date?
 
 // Make a Date
 const today = new Date() // Gets the time now
 // Print the date
-console.log(today, '<- Today')  
+console.log(today, '<- Today')
 // It's really a number
-console.log(today.getTime(), '<- Time') 
+console.log(today.getTime(), '<- Time')
 
 // It's really the number of milliseconds since 1970
 // get the number of years since 1970
 console.log('Years since 1970')
-console.log(today / 1000 / 60 / 60 / 24 / 365.25) 
+console.log(today / 1000 / 60 / 60 / 24 / 365.25)
 // Divide by 1000 to get seconds divide by 60 to get minutes
-// divide by 60 to get hours, divide by 24 to get days, 
+// divide by 60 to get hours, divide by 24 to get days,
 // divide by 365.25 to get years
 
 // or divide by 86,400 seconds
@@ -20,38 +20,46 @@ console.log(today / 86400 / 1000 / 365.25)
 
 console.log('-------- Age --------')
 
-// You can make a date from almost any 
-// human readable string for example: 
-const bday = new Date('Sept 26, 1965')
+// You can make a date from almost any
+// human readable string for example:
+const bday = new Date('Aug 24, 1990')
 // Challenge: Calculate your age with JS
-const age = today - bday 
+const age = today - bday
 console.log(age, '<- Age in ms')
 // Challenge: Calculate your age in secs, mins, hrs, days, years
+console.log(`${age / 1000 } < -- age in secs`)
+console.log(`${age / 1000/ 60} < -- age in mins`)
+console.log(`${age / 1000 / 60 / 60} < -- age in hrs`)
+console.log(`${age / 1000 / 60 / 60 / 24} < -- age in days`)
+console.log(`${age / 1000 / 60 / 60 / 24 / 365.25 } < -- age in years`)
 
 console.log('-------- BDay --------')
 
-// You can also initialize a date with 
+
+// You can also initialize a date with
 // year, month, date, hours, mins, secs, ms
 // (month is 0 indexed Jan == 0)
 
 const newYear = new Date(2021, 0, 1)
 // Get the components from a date
 console.log(newYear.getFullYear(), newYear.getMonth(), newYear.getDate())
-// To get the month by name you might: 
+// To get the month by name you might:
 const months = ['Jan','Feb','Mar','Apr','May','Jun', 'Jul','Aug','Sep','Oct','Nov','Dec']
 // Shows the month for new years
 console.log(months[newYear.getMonth()])
 // Challenge: Show the month of your birthday
 
-// Days of the week are also 0 indexed 0:Sun - 6:Sat 
+console.log(months[bday.getMonth()], '<-- Month of my birthday')
+// Days of the week are also 0 indexed 0:Sun - 6:Sat
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
 // Challenge: Show the day of the week of your birthday
 
+console.log(days[bday.getDay()], '<-- Day of the week of my birthday')
 console.log('-------- Data Offsets --------')
 
 // Date offsets show the difference between two dates
 
-const date = new Date()          // Start with a date 
+const date = new Date()          // Start with a date
 const startDate = new Date(date) // copy the date
 const dueDate = new Date(date)   // copy the date
 
@@ -67,20 +75,30 @@ console.log(startDate.getDate(), dueDate.getDate())
 console.log(startDate, dueDate)
 // Check these dates they should be 7 days ago and 3 days from now
 
-// Try these problems 
+// Try these problems
 
 console.log('--------- Problem 1 --------')
-// Schedule future dates - Given a date return a list of 
+// Schedule future dates - Given a date return a list of
 // dates separated by a days offset
 // date is a Date object
-// repeat is a number, the number of repeats 
+// repeat is a number, the number of repeats
 // offset is the number days between each of the dates returned
 
+
+
 function consecutiveDates(date, repeat, offset) {
-  // Your code here 
+  // Your code here
+  const dates = []
+  const futureDate = new Date(date)
+  console.log(`${date.getFullYear()}/${(date.getMonth())+1}/${date.getDate()}`)
+  for (let i = 1; i < repeat; i++){
+    futureDate.setDate(date.getDate() + offset)
+    date = futureDate
+    console.log(`${date.getFullYear()}/${(date.getMonth())+1}/${date.getDate()}`)
+  }
 }
 
-// Starting date 1/1/2019, repeat 4 times, return dates 
+// Starting date 1/1/2019, repeat 4 times, return dates
 // 3 days apart
 consecutiveDates(new Date(2019, 0, 1), 4, 3)
 
@@ -90,7 +108,7 @@ consecutiveDates(new Date(2019, 0, 1), 4, 3)
 // 3. 1/7/2019
 // 4. 1/10/2019
 
-// Stretch goals 
+// Stretch goals
 // add a unit for time:
 // consecutiveDates(new Date(2019, 0, 1), 3, 1, 'year')
 // Should return an array of 3 dates separated by 1 year
@@ -100,7 +118,7 @@ consecutiveDates(new Date(2019, 0, 1), 4, 3)
 // 3. 1/1/2021
 
 // function consecutiveDates(date, repeat, offset, unit = 'day') {
-// 
+//
 // }
 
 console.log('--------- Problem 2 --------')
@@ -113,15 +131,32 @@ console.log('--------- Problem 2 --------')
 // nums.sort((a,b) => a - b) -> [77, 888, 1111, 2222, 5555]
 
 function orderDates(dates) {
-  // orders the dates 
+  // orders the dates
   // returns a new array of ordered dates
+  const myArr = []
+  dates.forEach(element => {
+    let thisDate = new Date(element)
+    myArr.push(thisDate.getTime())
+  })
+
+  myArr.sort((a,b) => a - b)
+
+  const finalArr = []
+  myArr.forEach(date => {
+    let newDate = new Date(date)
+    let string = `${newDate.getFullYear()}/${(newDate.getMonth())+1}/${newDate.getDate()}`
+    finalArr.push(string)
+    console.log(string)
+  })
+
+  return finalArr
 }
 
 orderDates([today, dueDate, startDate, bday, newYear])
 
 // [bday, startdate, duedate, newyear]
 
-// Stretch: Return an object containing three keys each holding an array of dates. The keys are: 
+// Stretch: Return an object containing three keys each holding an array of dates. The keys are:
 
 // - past: array of dates that happened before today
 // - present: all dates that happen today
@@ -131,31 +166,52 @@ orderDates([today, dueDate, startDate, bday, newYear])
 
 console.log('--------- Problem 3 --------')
 
-// Given an array of dates find the date that will happen next. 
+// Given an array of dates find the date that will happen next.
 // You need to find the date that is closetest to today
 // but not before!
 
 function nextDate(dates) {
   // find the date that will happen next in dates
   // return the next date
+  const distanceArr = []
+  const now = new Date()
+  dates.forEach( date =>{
+    let newDate = new Date(date)
+    let distance = now - newDate
+    // removing dates prior to today's date
+    distance > 0 ? distanceArr.push(distance) : distance
+  })
+
+  // order distances from smallest to greatest
+  distanceArr.sort((a,b) => a - b)
+
+  // find the closest date by adding the smallest distance to today's date.
+  const nextDate = new Date(now + distanceArr[0])
+  console.log(`${nextDate.getFullYear()}/${(nextDate.getMonth())+1}/${nextDate.getDate()}`)
+  return nextDate
+
 }
 
 nextDate([today, dueDate, startDate, bday, newYear])
 
-// Stretch Goal: Return a human readable string: 
-// Your next appointment is 3 days from now. 
+// Stretch Goal: Return a human readable string:
+// Your next appointment is 3 days from now.
 
 console.log('--------- Problem 4 --------')
 
-// Birthday planner. Write a function that takes a date (your birthday) 
-// and a year, and returns the day of the week for that date in that year. 
+// Birthday planner. Write a function that takes a date (your birthday)
+// and a year, and returns the day of the week for that date in that year.
 
 function whensYourParty(date, year) {
   // Find the day of the year for your birthday
+  const bday = new Date(date.getDate(), date.getMonth(), year)
+  const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
+  console.log(days[bday.getDay()])
+  return days[bday.getDay()]
 }
 
 whensYourParty(bday, 2022)
 
-// Stretch Goal: Return an array listing all 
-// the days when your birthday occured since 
-// you were born. 
+// Stretch Goal: Return an array listing all
+// the days when your birthday occured since
+// you were born.
